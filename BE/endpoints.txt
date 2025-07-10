@@ -1,0 +1,7 @@
+/api/promedio_estudiante?nombre=Pepe Viyuela
+/api/todos_estudiantes
+/api/estudiante_evaluacion?nombre=Pepe Viyuela&evaluacion=Quiz 1
+/api/estudiante_evaluacion_tipo?nombre=Pepe Viyuela&tipo=Quiz
+/api/promedio_general
+/api/promedio_todos_estudiantes
+/api/promedio_todos_estudiantes_ordenado?ascending=true

@@ -22,6 +22,14 @@ def read_excel_data(url):
     
     return data_frame
 
+def get_all_students(df):
+    if df.empty:
+        return json.dumps({"message": "No hay datos disponibles."})
+    data = df[['Nombre', 'Nota', 'Fecha', 'Evaluacion', 'Tipo de Evaluacion', 'Modulo']].dropna()
+    if data.empty:
+        return json.dumps({"message": "No hay datos de estudiantes."})
+    return json.dumps(data.to_dict(orient='records'), default=str, indent=2)
+
 
 def get_student_assesment_grade(df, name, assessment):
     filtered = df.loc[(df['Nombre'] == name) & (df['Evaluacion'] == assessment)]
@@ -78,9 +86,9 @@ def get_all_student_average_sorted(df, ascending=True):
 df = read_excel_data(excel_url)
 
 
-print(get_student_assesment_grade(df, 'Pepe Viyuela', 'Quiz 2'))
-print(get_student_average(df, 'Pepe Viyuela'))
-print(get_student_type_assesment_grade(df, 'Pepe Viyuela', 'Quiz'))
-print(get_general_average(df))
-print(get_all_student_average(df))
-print(get_all_student_average_sorted(df, ascending=False))
+# print(get_student_assesment_grade(df, 'Pepe Viyuela', 'Quiz 2'))
+# print(get_student_average(df, 'Pepe Viyuela'))
+# print(get_student_type_assesment_grade(df, 'Pepe Viyuela', 'Quiz'))
+# print(get_general_average(df))
+# print(get_all_student_average(df))
+# print(get_all_student_average_sorted(df, ascending=False))
