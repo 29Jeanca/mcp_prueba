@@ -9,6 +9,7 @@ from logic.notas import (
     get_all_student_average,
     get_all_student_average_sorted
 )
+import os
 
 df = read_excel_data(excel_url)
 
@@ -16,7 +17,10 @@ def register_routes(app):
     @app.route('/')
     def home():
         return "<h1>Base url!</h1>"
-
+    @app.route('/debug-port')
+    def debug_port():
+        return f"Puerto en variable PORT: {os.getenv('PORT')}"
+    
     @app.route('/api/promedio_estudiante', methods=['GET'])
     def get_info_student_endpoint():
         nombre = request.args.get('nombre')
@@ -28,7 +32,7 @@ def register_routes(app):
         except Exception as e:
             return jsonify({"error": str(e)}), 500
 
-    @app.route('/api/todos_estudiantes', methods=['GET'])
+    @app.route('/api/todos_estudiantes', methods=['GET'])   
     def get_all_students_endpoint():
         try:
             result = get_all_students(df)
